@@ -111,10 +111,15 @@
 
             switch (roundnumber) {
                 case 1: round1(choice)
+                    break;
                 case 2: round2(choice)
+                    break;
                 case 3: round3(choice)
+                    break;
                 case 4: round4(choice)
+                    break;
                 case 5: round5(choice)
+                    break;
             }
         }
         function round1(choice) {
@@ -133,18 +138,18 @@
             },1000)
         }
         function round2(choice) {
-            // output.innerHTML = "<p>Predictable. It will throw scissors now.</p>"
-            // let computerChoice = getRandWin(choice);
-            // output.innerHTML += `<p>You played: ${choice}.</p>`
-            // setTimeout(()=>{
-            //     output.innerHTML += `<p>I choose: ${computerChoice}!</p>`
-            //     setTimeout(()=>{
-            //         output.innerHTML += `<p>I win. ;)</p>`
-            //         setTimeout(()=>{
-            //             playAgain.show()
-            //         },1000)
-            //     },500)
-            // },1000)
+            output.innerHTML += "<p>Predictable. It will throw scissors now.</p>"
+            let computerChoice = getRandWin(choice);
+            output.innerHTML += `<p>You played: ${choice}.</p>`
+            setTimeout(()=>{
+                output.innerHTML += `<p>I choose: ${computerChoice}!</p>`
+                setTimeout(()=>{
+                    output.innerHTML += `<p>I win. ;)</p>`
+                    setTimeout(()=>{
+                        playAgain.show()
+                    },1000)
+                },500)
+            },1000)
 
         }
         function round3(choice) {
@@ -166,7 +171,7 @@
             let notDone = true
             let computerChoice;
             while (notDone) {
-                computerChoice = choices[Math.floor(Math.random()*2)]
+                computerChoice = choices[Math.floor(Math.random()*3)]
                 if (gamelogic[computerChoice].beats == choice) {
                     notDone = false;
                 }
@@ -185,9 +190,36 @@
             return computerChoice;
         }
 
-        function removeButtons() {
+        function createButtons() {
             const butt = document.createElement("button");
-            output.appendChild(butt),id = "rock";
+            const node = document.createTextNode("Rock");
+            butt.appendChild(node);
+            output.appendChild(butt).id = "rock";
+
+            const butt2 = document.createElement("button");
+            const node2 = document.createTextNode("Paper");
+            butt2.appendChild(node2);
+            output.appendChild(butt2).id = "paper";
+
+            const butt3 = document.createElement("button");
+            const node3 = document.createTextNode("Scissors");
+            butt3.appendChild(node3);
+            output.appendChild(butt3).id = "scissors";
+
+            document.getElementById('rock').addEventListener('click',()=>{
+                removeButtons();
+                play('rock')
+            })
+            document.getElementById('paper').addEventListener('click',()=>{
+                removeButtons();
+                play('paper')
+            })
+            document.getElementById('scissors').addEventListener('click',()=>{
+                removeButtons();
+                play('scissors')
+            })
+            
+            playAgain.hide();
         }
 
         function removeButtons() {
