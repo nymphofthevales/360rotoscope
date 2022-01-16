@@ -127,6 +127,7 @@
             show = (string) => { 
                 this.HTMLElement.classList.remove('hidden');
                 this.messageOnClick = string;
+                scrollContent();
              }
             setText = (text) => { this.HTMLElement.innerText = text }
         }
