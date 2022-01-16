@@ -155,25 +155,25 @@
         function round1(choice) {
             output.innerHTML = "<h3>Round 1:</h3>"
             let computerChoice = getRandWin(choice);
-            output.innerHTML += `<p>You played: ${choice}.</p>`
+            output.innerHTML += `<p>>You played: ${choice}.</p>`
             
             setTimeout(()=>{
-                output.innerHTML += `<p>I choose: ${computerChoice}!</p>`
+                output.innerHTML += `<p>>I choose: ${computerChoice}!</p>`
                 setTimeout(()=>{
-                    output.innerHTML += `<p>I win. ;)</p>`
+                    output.innerHTML += `<p>>I win. ;)</p>`
                     setTimeout(()=>{
                         playAgain.show("<p>Predictable. It will throw scissors now.</p>")
-                    },1000)
-                },500)
-            },1000)
+                    },500)
+                },1000)
+            },500)
         }
         function round2(choice) { 
             let computerChoice = getRandWin(choice);
-            output.innerHTML += `<p>Foolishly, you played: ${choice}.</p>`
+            output.innerHTML += `<p>>Foolishly, you played: ${choice}.</p>`
             setTimeout(()=>{
-                output.innerHTML += `<p>Naturally, I choose: ${computerChoice}!</p>`
+                output.innerHTML += `<p>>Naturally, I choose: ${computerChoice}!</p>`
                 setTimeout(()=>{
-                    output.innerHTML += `<p>I win again. ;)</p>`
+                    output.innerHTML += `<p>>I win again. ;)</p>`
                     setTimeout(()=>{
                         playAgain.show("<p>Try again. It will throw rock.</p>")
                     },1000)
@@ -185,16 +185,16 @@
             let computerChoice = getRandWin(choice);
             output.innerHTML += `<p>This time you played: ${choice}.</p>`
             setTimeout(()=>{
-                output.innerHTML += `<p>But I had predicted this and chose...!</p>`
+                output.innerHTML += `<p>But I had predicted this and chose...</p>`
                 setTimeout(()=>{
                     output.innerHTML += `<p>...</p>`
                     setTimeout(()=>{
-                        output.innerHTML += `<p>${computerChoice}</p>`
+                        output.innerHTML += `<p>I chose ${computerChoice}? What?! I lost?!</p>`
                         setTimeout(()=>{
                             playAgain.show("<p>Try again. It will throw rock.</p>")
-                        },1000)
-                    }, 500)
-               },500)
+                        },500)
+                    }, 1000)
+               },1000)
             },1000)
         }
         function round4(choice) {
