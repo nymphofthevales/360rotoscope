@@ -23,21 +23,40 @@
         .hidden {
             display: none;
         }
+        #illusion-bg {
+            background-color: beige;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+        #choice-illusion {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: darkred;
+        }
     </style>
 </head>
 <body>
-    <head>
+    <header>
         <h1>Rock-Paper-Scissors Simulator</h1>
+    </header>
+    <main>
         <p>This is a rock paper scissors algorithm. It's going to put out paper first.</p>
             <button id="rock">Rock</button>
             <button id="paper">Paper</button>
             <button id="scissors">Scissors</button>
-            <div id="output">
-            <button id="play-again"></button>
-        </form>
-    </head>
+            <div id="output"></div>
+            <button id="play-again" class="hidden">Play Again</button>
+    </main>
+    <div id="illusion-bg"  class="hidden">
+        <h1 id="choice-illusion">CHOICE IS AN ILLUSION</h1>
+    </div>
     <script>
-        let roundnumber = 0;
+        let roundnumber = 1;
         let choices = ['rock', 'paper', 'scissors']
         let gamelogic = {
             "rock": {
@@ -58,9 +77,9 @@
             constructor(id) {
                 this.HTMLElement = document.getElementById(id);
             }
-            hide = () => { this.self.classList.add('hidden') }
-            show = () => { this.self.classList.remove('hidden') }
-            setText = (text) => { this.self.innerText = text }
+            hide = () => { this.HTMLElement.classList.add('hidden') }
+            show = () => { this.HTMLElement.classList.remove('hidden') }
+            setText = (text) => { this.HTMLElement.innerText = text }
         }
         let output = document.getElementById('output')
         let playAgain = new Button('play-again')
@@ -76,23 +95,35 @@
         scissors.HTMLElement.addEventListener('click',()=>{
             play('scissors')
         })
+        playAgain.HTMLElement.addEventListener('click',()=>{
+            roundnumber++
+            output.innerHTML+= `<h3>Round ${roundnumber}:</h3>`
+        })
+
+
+
         function play(choice) {
             switch (roundnumber) {
-                case 0: round1(choice)
-                case 1: round2(choice)
-                case 2: round3(choice)
-                case 3: round4(choice)
-                case 4: round5(choice)
+                case 1: round1(choice)
+                case 2: round2(choice)
+                case 3: round3(choice)
+                case 4: round4(choice)
+                case 5: round5(choice)
             }
-            roundnumber++
         }
         function round1(choice) {
-            output.innerHTML = ""
+            output.innerHTML = "<h3>Round 1:</h3>"
             let computerChoice = getRandWin(choice);
-            content.innerHTML += `<p>You played: ${choice}.</p>`
-            content.innerHTML += `<p>I choose: ${computerChoice}!</p>`
-            content.innerHTML += `<p>I win. ;)</p>`
-            playAgain.show()
+            output.innerHTML += `<p>You played: ${choice}.</p>`
+            setTimeout(()=>{
+                output.innerHTML += `<p>I choose: ${computerChoice}!</p>`
+                setTimeout(()=>{
+                    output.innerHTML += `<p>I win. ;)</p>`
+                    setTimeout(()=>{
+                        playAgain.show()
+                    },1000)
+                },500)
+            },1000)
         }
         function round2(choice) {
 
