@@ -32,19 +32,37 @@
             width: 100vw;
         }
         #choice-illusion {
+            color: darkred;
+        }
+        #game-frame {
+            padding: 0 0 0 100px;
+            height:50vh;
+            min-height: 200px;
+            width: 60vw;
+            min-width: 500px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            background-color: #aabbaa;
+        }
+        #game-frame {
+            border-left: 10px solid black;
+        }
+        #blackscreen {
+            background-color: #000000;
+        }
+        .center {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: darkred;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Rock-Paper-Scissors Simulator</h1>
-    </header>
-    <main>
+    <main id="game-frame" class="center">
+        <header>
+            <h1>Rock-Paper-Scissors Simulator</h1>
+        </header>
         <p>This is a rock paper scissors algorithm. It's going to put out paper first.</p>
             <button id="rock">Rock</button>
             <button id="paper">Paper</button>
@@ -53,8 +71,13 @@
             <button id="play-again" class="hidden">Play Again</button>
     </main>
     <div id="illusion-bg"  class="hidden">
-        <h1 id="choice-illusion">CHOICE IS AN ILLUSION</h1>
+        <h1 id="choice-illusion" class="center">CHOICE IS AN ILLUSION</h1>
     </div>
+    <div id="countdown">
+        <p id="countdown-number"></p>
+     </div>
+     <div id="blackscreen">
+     </div>
     <script>
         let roundnumber = 1;
         let choices = ['rock', 'paper', 'scissors']
