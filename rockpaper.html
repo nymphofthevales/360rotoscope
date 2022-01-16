@@ -99,13 +99,13 @@
             <div id="output"></div>
             <button id="play-again" class="hidden">Play Again</button>
     </main>
-    <div id="illusion"  class="hidden fillscreen">
+    <div id="illusion"  class="hidden">
         <h1 id="choice-illusion" class="center">CHOICE IS AN ILLUSION</h1>
     </div>
-    <div id="countdown" class="fillscreen hidden">
-        <h2 id="countdown-number" class="center"></h2>
+    <div id="countdown">
+        <p id="countdown-number"></p>
      </div>
-     <div id="blackscreen" class="fillscreen hidden">
+     <div id="blackscreen">
      </div>
     <script>
         let roundnumber = 1;
@@ -143,6 +143,7 @@
         let rock = new Button('rock')
         let paper = new Button('paper')
         let scissors = new Button('scissors')
+        let thrownFirst = 'null'
         rock.HTMLElement.addEventListener('click',()=>{
             removeButtons();
             play('rock')
@@ -181,16 +182,22 @@
                     break;
                 case 5: round5(choice)
                     break;
+                case 6: round6(choice)
+                    break;
+                case 7: round7(choice)
+                    break;
             }
         }
         function round1(choice) {
             output.innerHTML = "<h3>Round 1:</h3>"
             let computerChoice = getRandWin(choice);
+            thrownFirst = computerChoice
             print(`You played: ${choice}.`)
+            
             setTimeout(()=>{
-                print(`I choose: ${computerChoice}!`)
+                print(`I choose: ${computerChoice}`)
                 setTimeout(()=>{
-                    print(`I win. ;)`)
+                    print(`I win.`)
                     setTimeout(()=>{
                         playAgain.show("<p>Predictable. It will throw scissors now.</p>")
                     },500)
@@ -201,44 +208,83 @@
             let computerChoice = getRandWin(choice);
             print(`Foolishly, you played: ${choice}.`)
             setTimeout(()=>{
-                print(`Naturally, I choose: ${computerChoice}!`)
+                print(`Naturally, I choose: ${computerChoice}`)
                 setTimeout(()=>{
-                    print(`I win again. ;)`)
+                    print(`I win again.`)
                     setTimeout(()=>{
-                        playAgain.show("<p>Try again. I will throw rock.</p>")
+                        playAgain.show("<p>Try again. It will throw rock.</p>")
                     },1000)
                 },500)
             },1000)
+
         }
         function round3(choice) {
-            let computerChoice = getRandWin(choice);
+            let computerChoice = getRandLoss(choice);
             print(`This time you played: ${choice}.`)
             displayIllusion(200,0);
             displayIllusion(500,200+1000);
             displayIllusion(700,700+1700);
             setTimeout(()=>{
-                print(`But I had predicted this and chose...!`)
+                print(`I chose...!`)
                 setTimeout(()=>{
                     print(`...`)
                     setTimeout(()=>{
                         print(`${computerChoice}`)
                         setTimeout(()=>{
-                            playAgain.show("<p>Try again. It will throw rock.</p>")
+                            playAgain.show("<p>Better. It will throw what it threw the first time.</p>")
                         },500)
                     }, 1000)
                },1000)
             },1000)
         }
         function round4(choice) {
-            countdown(3);
-            playAgain.show();
+            let computerChoice = getRandWin(choice);
+            print(`You played: ${choice}.`)
+            setTimeout(()=>{
+                print(`But I chose: ${computerChoice}`)
+                setTimeout(()=>{
+                    print(`I win. Again.`)
+                    setTimeout(()=>{
+                        playAgain.show("<p>You'll need to think abother layer deeper. Paper.</p>")
+                    },1000)
+                },500)
+            },1000)
+
         }
         function round5(choice) {
-            playAgain.show();
+            let computerChoice = thrownFirst
+            print(`You played: ${choice}.`)
+            setTimeout(()=>{
+                print(`I choose: ${computerChoice}`)
+                    setTimeout(()=>{
+                        playAgain.show("<p>Again.</p>")
+                    },1000)
+            },1000)
+
         }
         function round6(choice) {
-            blackscreen();
+            let computerChoice = getRandLoss(choice);
+            print(`You played: ${choice}.`)
+            setTimeout(()=>{
+                print(`I choose: ${computerChoice}`)
+                    setTimeout(()=>{
+                        playAgain.show("<p>Again.</p>")
+                        countdown();
+                    },1000)
+            },1000)
         }
+        function round7(choice){
+            let computerChoice = getRandWin(choice);
+            print(`You played: ${choice}.`)
+            setTimeout(()=>{
+                print(`I choose: ${computerChoice}`)
+                    setTimeout(()=>{
+                        playAgain.show("<p>Forget the buttons. Again.</p>")
+                        blackscreen();
+                    },1000)
+            },1000)
+        }
+
         function getRandWin(choice) {
             let notDone = true
             let computerChoice;
@@ -302,13 +348,14 @@
         }
 
         function removeButtons() {
+
             let elem = document.getElementById("rock");
             elem.parentNode.removeChild(elem);
 
-            elem = document.getElementById("paper");
+             elem = document.getElementById("paper");
             elem.parentNode.removeChild(elem);
 
-            elem = document.getElementById("scissors");
+             elem = document.getElementById("scissors");
             elem.parentNode.removeChild(elem);
         }
         
@@ -322,7 +369,7 @@
             scrollContent();
         }
 
-        function displayIllusion(time, offset) {
+                function displayIllusion(time, offset) {
             overlay = document.getElementById('illusion')
             setTimeout(()=>{
                 overlay.classList.remove('hidden')
@@ -332,7 +379,7 @@
             },offset)
         }
 
-        function countdown(n) {
+        function countdown() {
             let frame = document.getElementById('countdown')
             let number = document.getElementById('countdown-number')
             frame.classList.remove('hidden')
@@ -354,25 +401,10 @@
                 },500)
             },1000)
         }
-        function timer(n,time, offset, gap) {
-            let frame = document.getElementById('countdown')
-            let number = document.getElementById('countdown-number')
-            countdown.classList.remove('hidden')
-            for (let i=0; i < n; i++) {
-                setTimeout(()=>{
-                    number.innerText = `${n - i}`
-                    setTimeout(()=>{
-                        number.innerText = ""
-                    },time)
-                },offset)
-                offset += gap + time;
-            }
-        }
         function blackscreen() {
             let screen = document.getElementById('blackscreen')
             screen.classList.remove('hidden')
         }
-        
     </script>
 </body>
 </html>
