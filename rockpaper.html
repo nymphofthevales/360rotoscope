@@ -97,11 +97,15 @@
         }
         class Button {
             HTMLElement;
+            messageOnClick;
             constructor(id) {
                 this.HTMLElement = document.getElementById(id);
             }
             hide = () => { this.HTMLElement.classList.add('hidden') }
-            show = () => { this.HTMLElement.classList.remove('hidden') }
+            show = (string) => { 
+                this.HTMLElement.classList.remove('hidden');
+                this.messageOnClick = string;
+             }
             setText = (text) => { this.HTMLElement.innerText = text }
         }
         let output = document.getElementById('output')
@@ -122,9 +126,12 @@
             play('scissors')
         })
         playAgain.HTMLElement.addEventListener('click',()=>{
+            playAgain.hide();
             roundnumber++
             output.innerHTML+= `<h3>Round ${roundnumber}:</h3>`
-            createButtons();
+            setTimeout(()=>{
+                createButtons(playAgain.messageOnClick)
+            }, 500)
         })
 
 
@@ -155,28 +162,40 @@
                 setTimeout(()=>{
                     output.innerHTML += `<p>I win. ;)</p>`
                     setTimeout(()=>{
-                        playAgain.show()
+                        playAgain.show("<p>Predictable. It will throw scissors now.</p>")
                     },1000)
                 },500)
             },1000)
         }
-        function round2(choice) {
-            output.innerHTML += "<p>Predictable. It will throw scissors now.</p>"
+        function round2(choice) { 
             let computerChoice = getRandWin(choice);
-            output.innerHTML += `<p>You played: ${choice}.</p>`
+            output.innerHTML += `<p>Foolishly, you played: ${choice}.</p>`
             setTimeout(()=>{
-                output.innerHTML += `<p>I choose: ${computerChoice}!</p>`
+                output.innerHTML += `<p>Naturally, I choose: ${computerChoice}!</p>`
                 setTimeout(()=>{
-                    output.innerHTML += `<p>I win. ;)</p>`
+                    output.innerHTML += `<p>I win again. ;)</p>`
                     setTimeout(()=>{
-                        playAgain.show()
+                        playAgain.show("<p>Try again. It will throw rock.</p>")
                     },1000)
                 },500)
             },1000)
 
         }
         function round3(choice) {
-           // output.innerHTML = "<p>This is round 3 ha</p>"
+            let computerChoice = getRandWin(choice);
+            output.innerHTML += `<p>This time you played: ${choice}.</p>`
+            setTimeout(()=>{
+                output.innerHTML += `<p>But I had predicted this and chose...!</p>`
+                setTimeout(()=>{
+                    output.innerHTML += `<p>...</p>`
+                    setTimeout(()=>{
+                        output.innerHTML += `<p>${computerChoice}</p>`
+                        setTimeout(()=>{
+                            playAgain.show("<p>Try again. It will throw rock.</p>")
+                        },1000)
+                    }, 500)
+               },500)
+            },1000)
         }
         function round4(choice) {
 
@@ -210,36 +229,40 @@
             return computerChoice;
         }
 
-        function createButtons() {
-            const butt = document.createElement("button");
-            const node = document.createTextNode("Rock");
-            butt.appendChild(node);
-            output.appendChild(butt).id = "rock";
+        function createButtons(string) {
+            if(string != undefined) {
+               output.innerHTML += string;
+            }
+            setTimeout(()=>{
+                const butt = document.createElement("button");
+                const node = document.createTextNode("Rock");
+                butt.appendChild(node);
+                output.appendChild(butt).id = "rock";
 
-            const butt2 = document.createElement("button");
-            const node2 = document.createTextNode("Paper");
-            butt2.appendChild(node2);
-            output.appendChild(butt2).id = "paper";
+                const butt2 = document.createElement("button");
+                const node2 = document.createTextNode("Paper");
+                butt2.appendChild(node2);
+                output.appendChild(butt2).id = "paper";
 
-            const butt3 = document.createElement("button");
-            const node3 = document.createTextNode("Scissors");
-            butt3.appendChild(node3);
-            output.appendChild(butt3).id = "scissors";
+                const butt3 = document.createElement("button");
+                const node3 = document.createTextNode("Scissors");
+                butt3.appendChild(node3);
+                output.appendChild(butt3).id = "scissors";
 
-            document.getElementById('rock').addEventListener('click',()=>{
-                removeButtons();
-                play('rock')
-            })
-            document.getElementById('paper').addEventListener('click',()=>{
-                removeButtons();
-                play('paper')
-            })
-            document.getElementById('scissors').addEventListener('click',()=>{
-                removeButtons();
-                play('scissors')
-            })
-            
-            playAgain.hide();
+                document.getElementById('rock').addEventListener('click',()=>{
+                    removeButtons();
+                    play('rock')
+                })
+                document.getElementById('paper').addEventListener('click',()=>{
+                    removeButtons();
+                    play('paper')
+                })
+                document.getElementById('scissors').addEventListener('click',()=>{
+                    removeButtons();
+                    play('scissors')
+                })
+            }, 500)
+        
         }
 
         function removeButtons() {
