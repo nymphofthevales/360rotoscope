@@ -56,6 +56,28 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
+        *::-webkit-scrollbar-track {
+            border-radius: 0px;
+            background-color: transparent;
+        }
+
+        *::-webkit-scrollbar {
+            width: 15px;
+            height: 15px;
+            background-color: #bbccbb;
+            pointer-events: none;
+            cursor: cell;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            border-radius: 0px;
+            background-color: #99aa99;
+        }
+
+        *::-webkit-scrollbar-corner {
+            background: rgba(0,0,0,0);
+        }
     </style>
 </head>
 <body>
@@ -282,7 +304,8 @@
         }
         
         function scrollContent() {
-            document.getElementById("game-frame").scrollTo(0,document.getElementById("game-frame").scrollHeight);
+            let frame = document.getElementById('game-frame');
+            frame.scrollTo(0, frame.scrollHeight)
         }
 
         function print(string) {
