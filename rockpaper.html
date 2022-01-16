@@ -24,17 +24,6 @@
         .hidden {
             display: none;
         }
-        #illusion-bg {
-            background-color: beige;
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100vh;
-            width: 100vw;
-        }
-        #choice-illusion {
-            color: darkred;
-        }
         #game-frame {
             padding: 10px 30px 100px 100px;
             height:50vh;
@@ -47,9 +36,6 @@
         }
         #game-frame {
             border-left: 10px solid black;
-        }
-        #blackscreen {
-            background-color: #000000;
         }
         .center {
             position: absolute;
@@ -79,6 +65,26 @@
         *::-webkit-scrollbar-corner {
             background: rgba(0,0,0,0);
         }
+        #illusion {
+            background-color: beige;
+        }
+        #choice-illusion {
+            color: darkred;
+        }
+        #blackscreen {
+            background-color: #000000;
+        }
+        #countdown {
+            background-color: beige;
+            color: black;
+        }
+        .fillscreen {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 100vw;
+        }
     </style>
 </head>
 <body>
@@ -93,13 +99,13 @@
             <div id="output"></div>
             <button id="play-again" class="hidden">Play Again</button>
     </main>
-    <div id="illusion"  class="hidden">
+    <div id="illusion"  class="hidden fillscreen">
         <h1 id="choice-illusion" class="center">CHOICE IS AN ILLUSION</h1>
     </div>
-    <div id="countdown">
-        <p id="countdown-number"></p>
+    <div id="countdown" class="fillscreen hidden">
+        <h2 id="countdown-number" class="center"></h2>
      </div>
-     <div id="blackscreen">
+     <div id="blackscreen" class="fillscreen hidden">
      </div>
     <script>
         let roundnumber = 1;
@@ -181,7 +187,6 @@
             output.innerHTML = "<h3>Round 1:</h3>"
             let computerChoice = getRandWin(choice);
             print(`You played: ${choice}.`)
-            
             setTimeout(()=>{
                 print(`I choose: ${computerChoice}!`)
                 setTimeout(()=>{
@@ -204,11 +209,13 @@
                     },1000)
                 },500)
             },1000)
-
         }
         function round3(choice) {
             let computerChoice = getRandWin(choice);
             print(`This time you played: ${choice}.`)
+            displayIllusion(200,0);
+            displayIllusion(500,200+1000);
+            displayIllusion(700,700+1700);
             setTimeout(()=>{
                 print(`But I had predicted this and chose...!`)
                 setTimeout(()=>{
@@ -223,13 +230,15 @@
             },1000)
         }
         function round4(choice) {
-
+            countdown(3);
+            playAgain.show();
         }
         function round5(choice) {
-
+            timer(5,1000,0,500)
+            playAgain.show();
         }
         function round6(choice) {
-
+            blackscreen();
         }
         function getRandWin(choice) {
             let notDone = true
@@ -294,14 +303,13 @@
         }
 
         function removeButtons() {
-
             let elem = document.getElementById("rock");
             elem.parentNode.removeChild(elem);
 
-             elem = document.getElementById("paper");
+            elem = document.getElementById("paper");
             elem.parentNode.removeChild(elem);
 
-             elem = document.getElementById("scissors");
+            elem = document.getElementById("scissors");
             elem.parentNode.removeChild(elem);
         }
         
@@ -314,6 +322,70 @@
             output.innerHTML += `<p>> ${string}</p>`
             scrollContent();
         }
+
+        function displayIllusion(time, offset) {
+            overlay = document.getElementById('illusion')
+            setTimeout(()=>{
+                overlay.classList.remove('hidden')
+                setTimeout(()=>{
+                    overlay.classList.add('hidden')
+                },time)
+            },offset)
+        }
+
+        function countdown(n) {
+            let frame = document.getElementById('countdown')
+            let number = document.getElementById('countdown-number')
+            frame.classList.remove('hidden')
+            number.innerText = "3"
+            setTimeout(()=>{
+                number.innerText = ""
+                setTimeout(()=>{
+                    number.innerText = "2"
+                    setTimeout(()=>{
+                        number.innerText = ""
+                        setTimeout(()=>{
+                            number.innerText = "1"
+                            setTimeout(()=>{
+                                number.innerText = ""
+                                frame.classList.add('hidden')
+                            },1000)
+                        },500)
+                    },1000)
+                },500)
+            },1000)
+            /*let time = 1000;
+            let offset = 0;
+            let gap = 500;
+            for (let i=0; i < n; i++) {
+                setTimeout(()=>{
+                    number.innerText = `${n - i}`
+                    setTimeout(()=>{
+                        number.innerText = ""
+                    },time)
+                },offset)
+                offset += gap + time;
+            }*/
+        }
+        function timer(n,time, offset, gap) {
+            let frame = document.getElementById('countdown')
+            let number = document.getElementById('countdown-number')
+            countdown.classList.remove('hidden')
+            for (let i=0; i < n; i++) {
+                setTimeout(()=>{
+                    number.innerText = `${n - i}`
+                    setTimeout(()=>{
+                        number.innerText = ""
+                    },time)
+                },offset)
+                offset += gap + time;
+            }
+        }
+        function blackscreen() {
+            let screen = document.getElementById('blackscreen')
+            screen.classList.remove('hidden')
+        }
+        
     </script>
 </body>
 </html>
