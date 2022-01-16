@@ -18,6 +18,10 @@
         button:hover {
             background-color: #aaaaaa;
         }
+        .moving-button:hover {
+            margin-left: 50px;
+            color: red;
+        }
         button:active {
             background-color: #555555;
         }
@@ -188,6 +192,7 @@
                     print(`I win. ;)`)
                     setTimeout(()=>{
                         playAgain.show("<p>Predictable. It will throw scissors now.</p>")
+                        
                     },500)
                 },1000)
             },500)
@@ -253,6 +258,18 @@
             }
             return computerChoice;
         }
+
+        function makeButtonsMove() {
+                let eleme = document.getElementById('rock');
+                eleme.classList.add('moving-button');
+
+                eleme = document.getElementById('paper');
+                eleme.classList.add('moving-button');
+
+                eleme = document.getElementById('scissors');
+                eleme.classList.add('moving-button');
+        }
+
 
         function createButtons(string) {
             if(string != undefined) {
