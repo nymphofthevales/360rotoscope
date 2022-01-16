@@ -103,7 +103,7 @@
         <h1 id="choice-illusion" class="center">CHOICE IS AN ILLUSION</h1>
     </div>
     <div id="countdown" class="hidden fillscreen">
-        <h2 id="countdown-number"></h2>
+        <h2 id="countdown-number" class="center"></h2>
      </div>
      <div id="blackscreen" class="hidden fillscreen">
      </div>
@@ -245,7 +245,7 @@
                 setTimeout(()=>{
                     print(`I win. Again.`)
                     setTimeout(()=>{
-                        playAgain.show("<p>You'll need to think abother layer deeper. Paper.</p>")
+                        playAgain.show("<p>You'll need to think another layer deeper. Paper.</p>")
                     },1000)
                 },500)
             },1000)
@@ -300,7 +300,7 @@
             let notDone = true
             let computerChoice;
             while (notDone) {
-                computerChoice = choices[Math.floor(Math.random()*2)]
+                computerChoice = choices[Math.floor(Math.random()*3)]
                 if (gamelogic[computerChoice].loses == choice) {
                     notDone = false;
                 }
