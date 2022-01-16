@@ -140,9 +140,6 @@
         function round6(choice) {
 
         }
-        function printPlayerChoice(choice) {
-            output.innerHTML += `<p>You played: ${choice}.</p>`
-        }
         function getRandWin(choice) {
             let notDone = true
             let computerChoice;
@@ -165,23 +162,7 @@
             }
             return computerChoice;
         }
-        /*function print(string) {
-             let charsArray = string.split('');
-            function loop(i) {
-                setTimeout(()=>{
-                    output.innerText= `${output.textContent}` + `${charsArray[i]}`;
-                    if (output.innerText.length < charsArray.length) {
-                        stillPrinting = true;
-                        loop(i+1);
-                    } else {
-                        stillPrinting = false;
-                        return;
-                    }
-                },50)
-            }
-            loop(0);
-            return true
-        }*/
+
     </script>
 </body>
 </html>
