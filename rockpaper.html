@@ -45,7 +45,7 @@
         <h1>Rock-Paper-Scissors Simulator</h1>
     </header>
     <main>
-        <p>This is a rock paper scissors algorithm. It's going to put out paper first.</p>
+        <p id="story-text">This is a rock paper scissors algorithm. It's going to put out paper first.</p>
             <button id="rock">Rock</button>
             <button id="paper">Paper</button>
             <button id="scissors">Scissors</button>
@@ -87,22 +87,28 @@
         let paper = new Button('paper')
         let scissors = new Button('scissors')
         rock.HTMLElement.addEventListener('click',()=>{
+            removeButtons();
             play('rock')
         })
         paper.HTMLElement.addEventListener('click',()=>{
+            removeButtons();
             play('paper')
         })
         scissors.HTMLElement.addEventListener('click',()=>{
+            removeButtons();
             play('scissors')
         })
         playAgain.HTMLElement.addEventListener('click',()=>{
             roundnumber++
             output.innerHTML+= `<h3>Round ${roundnumber}:</h3>`
+            createButtons();
         })
 
 
 
         function play(choice) {
+            
+
             switch (roundnumber) {
                 case 1: round1(choice)
                 case 2: round2(choice)
@@ -115,6 +121,7 @@
             output.innerHTML = "<h3>Round 1:</h3>"
             let computerChoice = getRandWin(choice);
             output.innerHTML += `<p>You played: ${choice}.</p>`
+            
             setTimeout(()=>{
                 output.innerHTML += `<p>I choose: ${computerChoice}!</p>`
                 setTimeout(()=>{
@@ -126,10 +133,22 @@
             },1000)
         }
         function round2(choice) {
+            // output.innerHTML = "<p>Predictable. It will throw scissors now.</p>"
+            // let computerChoice = getRandWin(choice);
+            // output.innerHTML += `<p>You played: ${choice}.</p>`
+            // setTimeout(()=>{
+            //     output.innerHTML += `<p>I choose: ${computerChoice}!</p>`
+            //     setTimeout(()=>{
+            //         output.innerHTML += `<p>I win. ;)</p>`
+            //         setTimeout(()=>{
+            //             playAgain.show()
+            //         },1000)
+            //     },500)
+            // },1000)
 
         }
         function round3(choice) {
-
+           // output.innerHTML = "<p>This is round 3 ha</p>"
         }
         function round4(choice) {
 
@@ -164,6 +183,23 @@
                 }
             }
             return computerChoice;
+        }
+
+        function removeButtons() {
+            const butt = document.createElement("button");
+            output.appendChild(butt),id = "rock";
+        }
+
+        function removeButtons() {
+
+            let elem = document.getElementById("rock");
+            elem.parentNode.removeChild(elem);
+
+             elem = document.getElementById("paper");
+            elem.parentNode.removeChild(elem);
+
+             elem = document.getElementById("scissors");
+            elem.parentNode.removeChild(elem);
         }
         /*function print(string) {
              let charsArray = string.split('');
