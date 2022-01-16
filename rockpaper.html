@@ -128,6 +128,7 @@
             show = (string) => { 
                 this.HTMLElement.classList.remove('hidden');
                 this.messageOnClick = string;
+                scrollContent();
              }
             setText = (text) => { this.HTMLElement.innerText = text }
         }
@@ -152,6 +153,7 @@
             playAgain.hide();
             roundnumber++
             output.innerHTML+= `<h3>Round ${roundnumber}:</h3>`
+            scrollContent();
             setTimeout(()=>{
                 createButtons(playAgain.messageOnClick)
             }, 500)
@@ -256,6 +258,7 @@
             if(string != undefined) {
                output.innerHTML += string;
             }
+            scrollContent();
             setTimeout(()=>{
                 const butt = document.createElement("button");
                 const node = document.createTextNode("Rock");
@@ -284,7 +287,9 @@
                     removeButtons();
                     play('scissors')
                 })
+                scrollContent();
             }, 500)
+            
         
         }
 
