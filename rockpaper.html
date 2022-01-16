@@ -129,6 +129,7 @@
             playAgain.hide();
             roundnumber++
             output.innerHTML+= `<h3>Round ${roundnumber}:</h3>`
+            scrollContent();
             setTimeout(()=>{
                 createButtons(playAgain.messageOnClick)
             }, 500)
@@ -233,6 +234,7 @@
             if(string != undefined) {
                output.innerHTML += string;
             }
+            scrollContent();
             setTimeout(()=>{
                 const butt = document.createElement("button");
                 const node = document.createTextNode("Rock");
@@ -261,7 +263,9 @@
                     removeButtons();
                     play('scissors')
                 })
+                scrollContent();
             }, 500)
+            
         
         }
 
@@ -278,7 +282,7 @@
         }
         
         function scrollContent() {
-            output.scrollTop = output.scrollHeight;
+            document.getElementById("game-frame").scrollTo(0,document.getElementById("game-frame").scrollHeight);
         }
 
         function print(string) {
