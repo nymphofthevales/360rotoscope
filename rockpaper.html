@@ -18,10 +18,6 @@
         button:hover {
             background-color: #aaaaaa;
         }
-        .moving-button:hover {
-            margin-left: 50px;
-            color: red;
-        }
         button:active {
             background-color: #555555;
         }
@@ -197,7 +193,6 @@
                     print(`I win. ;)`)
                     setTimeout(()=>{
                         playAgain.show("<p>Predictable. It will throw scissors now.</p>")
-                        
                     },500)
                 },1000)
             },500)
@@ -216,7 +211,7 @@
             },1000)
         }
         function round3(choice) {
-            let computerChoice = getRandLoss(choice);
+            let computerChoice = getRandWin(choice);
             print(`This time you played: ${choice}.`)
             displayIllusion(200,0);
             displayIllusion(500,200+1000);
@@ -239,7 +234,6 @@
             playAgain.show();
         }
         function round5(choice) {
-            timer(5,1000,0,500)
             playAgain.show();
         }
         function round6(choice) {
@@ -267,18 +261,6 @@
             }
             return computerChoice;
         }
-
-        function makeButtonsMove() {
-                let eleme = document.getElementById('rock');
-                eleme.classList.add('moving-button');
-
-                eleme = document.getElementById('paper');
-                eleme.classList.add('moving-button');
-
-                eleme = document.getElementById('scissors');
-                eleme.classList.add('moving-button');
-        }
-
 
         function createButtons(string) {
             if(string != undefined) {
@@ -371,18 +353,6 @@
                     },1000)
                 },500)
             },1000)
-            /*let time = 1000;
-            let offset = 0;
-            let gap = 500;
-            for (let i=0; i < n; i++) {
-                setTimeout(()=>{
-                    number.innerText = `${n - i}`
-                    setTimeout(()=>{
-                        number.innerText = ""
-                    },time)
-                },offset)
-                offset += gap + time;
-            }*/
         }
         function timer(n,time, offset, gap) {
             let frame = document.getElementById('countdown')
